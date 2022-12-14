@@ -142,22 +142,20 @@ void Film::DeleteFilm(vector<Film> & mas)
 
 void Film::WriteFile(vector<Film> & mas)
 {
-	ofstream fout;
-	fout.open("films_all.txt", ofstream::out | ofstream::app);
-	if (!fout.is_open())
-	{
-		cout << "Error" << endl;
-	}
-	else
-	{
-		cout << "File is opened" << endl;
-		for (int i = 0; i < mas.size(); i++)
+	fstream fs;
+		fs.open("films_all.txt", ios::in);
+		if (!fs.fail())
 		{
-			fout.write((char*)& mas[i], sizeof(Film));
+			cout << "Error" << endl;
 		}
-		cout << "End of write" << endl;
-		fout.close();
-	}
+
+		ofstream fz;
+		fz.open("films_all.txt");
+		for (auto it = mas.begin(); it != mas.end(); it++)
+		{
+			fz << *it;
+		}
+		fz.close();
 }
 ostream& operator<<(ostream & os, Film & f)
 {
@@ -165,69 +163,50 @@ ostream& operator<<(ostream & os, Film & f)
 	return os;
 }
 
-void Film::ReadFile()
+void Film::ReadFile(vector<Film>& mas)
 {
 
-	int size = 100;
-	Film* ar = new Film[size];
-	ifstream fin;
-	fin.open("films_all.txt");
-	if (!fin.is_open())
+	ifstream fw;
+	fw.open("films_all.txt");
+	if (!fw.is_open())
 	{
 		cout << "Error" << endl;
 	}
 	else
 	{
-		cout << "File open" << endl << endl;
-		int i = 0;
-
-		while (fin.read((char*)& ar[i], sizeof(Film)))
+		Film tmp;
+		while (fw >> tmp.name >> tmp.author >> tmp.genre>>tmp.rating>>tmp.price)
 		{
-			cout << setw(3) << i + 1 << ")"; ar[i].Print();
-			i++;
+			mas.push_back(tmp);
+		}
+		fw.close();
+		for (int i = 0; i < mas.size(); i++)
+		{
+			cout << mas[i] << endl;
 		}
 	}
-	fin.close();
-	cout << endl << "End read" << endl;
-	//ifstream fin;
-	//vector<Film>my_vector;
-	//fin.open("films_all.txt");
-	//if (!fin.is_open())
-	//{
-	//	cout << "Error" << endl;
-	//}
-	//else
-	//{
-	//	int i = 0;
-	//	cout << "File is opened" << endl;
-	//	while (fin.read((char*)&my_vector[i], sizeof(Film)))
-	//	{
-	//		my_vector[i].Print();
-	//	}
-	//	fin.close();
-	//}
-	
+
 
 }
 
 void Film::WriteFile_new(vector<Film>& mas)
 {
-	ofstream fout;
-	fout.open("films_sorted.txt", ofstream::out | ofstream::app);
-	if (!fout.is_open())
+
+
+	fstream fs;
+	fs.open("films_sorted.txt", ios::in);
+	if (!fs.fail())
 	{
 		cout << "Error" << endl;
 	}
-	else
+
+	ofstream fz;
+	fz.open("films_sorted.txt");
+	for (auto it = mas.begin(); it != mas.end(); it++)
 	{
-		cout << "File is opened" << endl;
-		for (int i = 0; i < mas.size(); i++)
-		{
-			fout.write((char*)& mas[i], sizeof(Film));
-		}
-		cout << "End of write" << endl;
-		fout.close();
+		fz << *it;
 	}
+	fz.close();
 }
 
 

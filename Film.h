@@ -46,7 +46,7 @@ public:
 	void Search_genre(vector<Film>& mas, Film f);
 	void DeleteFilm(vector<Film>& mas);
 	void WriteFile(vector<Film>& mas);
-	void ReadFile();
+	void ReadFile(vector<Film>& v);
 	friend ostream& operator<<(ostream& os, Film& f);
 	void WriteFile_new(vector<Film>& mas);
 };

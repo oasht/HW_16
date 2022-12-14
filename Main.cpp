@@ -14,17 +14,15 @@ void main()
 	Film f9("Beetlejuice", "Tim_Burton", "Horror", 4.9, 43.89);
 	Film f10("The_Terminal", "Steven_Spielberg", "Romance", 7.9, 65.83);
 
-	v_films.push_back(f1);
-	v_films.push_back(f2);
-	v_films.push_back(f3);
-	v_films.push_back(f4);
-	v_films.push_back(f5);
-	v_films.push_back(f6);
-	v_films.push_back(f7);
-	v_films.push_back(f8);
-	v_films.push_back(f9);
-	v_films.push_back(f10);
 
+	Film film_all[10] = { f1, f2, f3, f4, f5, f6, f7, f8, f9, f10 };
+	for (int i = 0; i < 10; i++)
+	{
+		v_films.push_back(film_all[i]);
+	}
+	
+	Film tmp;
+    //tmp.WriteFile(v_films);
 	bool key_1;
 	do
 	{
@@ -41,14 +39,8 @@ void main()
 		{
 		case 1:
 		{system("cls");
-		f1.ReadFile();
-		for (int i = 0; i < v_films.size(); i++)
-		{
-			
-			//cout << i + 1 << ") ";
-			//v_films[i].Print();
-			
-		}
+		
+			f1.ReadFile(v_films);
 		}
 
 		break;
